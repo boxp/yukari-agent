@@ -1,0 +1,8 @@
+version: "2"
+services:
+  yukari-agent:
+    image: asia.gcr.io/${PROJECT_NAME}/yukari-agent:$CIRCLE_SHA1
+    environment:
+      YUKARI_AGENT_EXAMPLE_PORT: "8000"
+      YUKARI_AGENT_MY_WEBAPP_PORT: "8080"
+    command: /bin/bash -c "lein test"
