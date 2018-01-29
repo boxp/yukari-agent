@@ -27,9 +27,8 @@
                       (= (-> rtm-connection :start :self :id))))))
 
 (defn- subscribe-message
-  [rtm-connection]
-  (let [c (chan)
-        f #(some->> %
+  [rtm-connection c]
+  (let [f #(some->> %
                     (wrap-for-me? rtm-connection)
                     (wrap-from-me? rtm-connection)
                     (put! c))]
@@ -39,10 +38,12 @@
 (defrecord SlackRtmDatasource [rtm-connection message-channel token]
   component/Lifecycle
   (start [this]
-    (let [rtm-connection (rtm/connect token)]
+    (let [c (chan)
+          rtm-connection (rtm/connect token
+                                      :on-close #(put! c %))]
       (-> this
           (assoc :rtm-connection rtm-connection)
-          (assoc :message-channel (subscribe-message rtm-connection)))))
+          (assoc :message-channel (subscribe-message rtm-connection c)))))
   (stop [{:keys [rtm-connection message-channel] :as this}]
     (close! message-channel)
     (when-not (nil? rtm-connection)

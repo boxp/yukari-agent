@@ -8,6 +8,14 @@
 (defmulti reaction
   (fn [_ m] (:type m)))
 
+(defmethod reaction :error
+  [{:keys [speak-usecase] :as c}
+   {:keys [reason] :as m}]
+  (println m)
+  (throw
+    (ex-info "Slack Rtm Disconnected."
+           {:reason reason})))
+
 (defmethod reaction :mention
   [{:keys [speak-usecase] :as c}
    {:keys [username text] :as m}]
@@ -15,15 +23,15 @@
   (speak-usecase/speak speak-usecase username text))
 
 (defmethod reaction :default
-  [_ _])
+  [_ m]
+  (println m))
 
 (defn- agent-loop
-  [{:keys [mention-usecase] :as c}]
-  (let [mention-chan (mention-usecase/subscribe mention-usecase)]
-    (async/go-loop [m {}]
-      (when m
-        (reaction c m)
-        (recur (async/<! mention-chan))))))
+  [c]
+  (loop [m {}]
+    (when m
+      (reaction c m)
+      (recur (async/<!! (mention-usecase/subscribe (:mention-usecase c)))))))
 
 (defrecord YukariAgent [speak-usecase mention-usecase]
   component/Lifecycle
