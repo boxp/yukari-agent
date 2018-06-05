@@ -9,8 +9,11 @@
           (io/copy (io/file file-path))))
 
 (defn- play
-  [file-path]
-  (let [res (shell/sh "aplay" "-t" "raw" "-r" "16000" "-c" "1" "-f" "S16_BE" file-path)]
+  [file-path {:keys [type sample-rate channels format] :as opts}]
+  (let [res (shell/sh "aplay" "-t" (or type "raw")
+                      "-r" (or sample-rate "16000")
+                      "-c" (or channels "1")
+                      "-f" (or format "S16_BE") file-path)]
     (when (not= 0 (:exit res))
       (throw
         (ex-info "Command execution failed"
@@ -18,9 +21,9 @@
            :error-message (:error res)})))))
 
 (defn play-content
-  [c file-path content]
+  [c file-path content & opts]
   (write-file file-path content)
-  (play file-path))
+  (play file-path opts))
 
 (defrecord OsDatasource []
   component/Lifecycle

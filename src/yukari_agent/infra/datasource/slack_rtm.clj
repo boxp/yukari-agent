@@ -39,7 +39,9 @@
   component/Lifecycle
   (start [this]
     (let [c (chan)
-          rtm-connection (rtm/connect token
+          rtm-connection (rtm/connect {:api-url "https://slack.com/api"
+                                       :token token
+                                       :max-text-message-size (* 1024 1024 2)}
                                       :on-close #(put! c %))]
       (-> this
           (assoc :rtm-connection rtm-connection)

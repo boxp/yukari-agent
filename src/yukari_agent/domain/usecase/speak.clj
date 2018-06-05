@@ -10,8 +10,9 @@
                           {:text
                            (str
                              (or username "名無し")
-                             "さんからのメンションです。"
-                             text)}))
+                             "です。"
+                             text)
+                           :cast :sasara}))
 
 (defrecord SpeakUsecase [speak-repository]
   component/Lifecycle

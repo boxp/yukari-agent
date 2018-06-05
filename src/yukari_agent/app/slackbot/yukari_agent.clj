@@ -11,7 +11,6 @@
 (defmethod reaction :error
   [{:keys [speak-usecase] :as c}
    {:keys [reason] :as m}]
-  (println m)
   (throw
     (ex-info "Slack Rtm Disconnected."
            {:reason reason})))
@@ -19,12 +18,12 @@
 (defmethod reaction :mention
   [{:keys [speak-usecase] :as c}
    {:keys [username text] :as m}]
-  (println m)
   (speak-usecase/speak speak-usecase username text))
 
 (defmethod reaction :default
-  [_ m]
-  (println m))
+  [{:keys [speak-usecase] :as c}
+   {:keys [username text] :as m}]
+  (speak-usecase/speak speak-usecase username text))
 
 (defn- agent-loop
   [c]
