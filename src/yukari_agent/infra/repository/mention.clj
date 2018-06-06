@@ -7,7 +7,6 @@
 
 (defn- Post->Mention
   [{:keys [type channel user text ts for-me? from-me? username optionals] :as post}]
-  (println post)
   (if (= type :on-close)
     {:type :error
      :reason (:reason post)}

@@ -22,8 +22,7 @@
 
 (defmethod reaction :default
   [{:keys [speak-usecase] :as c}
-   {:keys [username text] :as m}]
-  (speak-usecase/speak speak-usecase username text))
+   {:keys [username text] :as m}])
 
 (defn- agent-loop
   [c]

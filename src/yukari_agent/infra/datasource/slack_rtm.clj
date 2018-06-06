@@ -38,7 +38,7 @@
 (defrecord SlackRtmDatasource [rtm-connection message-channel token]
   component/Lifecycle
   (start [this]
-    (let [c (chan)
+    (let [c (chan 1024)
           rtm-connection (rtm/connect {:api-url "https://slack.com/api"
                                        :token token
                                        :max-text-message-size (* 1024 1024 2)}

@@ -1,6 +1,7 @@
 (ns yukari-agent.infra.repository.speak
   (:require [com.stuartsierra.component :as component]
             [clojure.spec.alpha :as s]
+            [ring.util.codec :as codec]
             [yukari-agent.domain.entity.speak :as speak]
             [yukari-agent.infra.datasource.ai-talk :as ai-talk]
             [yukari-agent.infra.datasource.sasara :as sasara]
@@ -19,7 +20,7 @@
 (defmethod speak :sasara
   [{:keys [os-datasource sasara-datasource]} speak]
   (try
-    (as-> (sasara/post-speak sasara-datasource (:text speak)) $
+    (as-> (sasara/post-speak sasara-datasource (-> speak :text codec/url-encode)) $
           (os/play-content os-datasource
                            tmp-file-path
                            $
