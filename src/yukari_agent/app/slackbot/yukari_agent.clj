@@ -12,8 +12,8 @@
   [{:keys [speak-usecase] :as c}
    {:keys [reason] :as m}]
   (throw
-    (ex-info "Slack Rtm Disconnected."
-           {:reason reason})))
+   (ex-info "Slack Rtm Disconnected."
+            {:reason reason})))
 
 (defmethod reaction :mention
   [{:keys [speak-usecase] :as c}
@@ -33,7 +33,8 @@
 
 (defrecord YukariAgent [speak-usecase mention-usecase]
   component/Lifecycle
-  (start [this]
+  (start [{:keys [speak-usecase] :as this}]
+    (speak-usecase/speak speak-usecase "わたし" "起動完了しました。")
     (agent-loop this)
     this)
   (stop [this] this))
