@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/core.async "0.4.474"]
-                 [environ "1.1.0"]
+                 [environ "1.2.0"]
                  [com.stuartsierra/component "0.3.2"]
                  [slack-rtm "0.1.7-SNAPSHOT"]
                  [ring "1.6.1"]
