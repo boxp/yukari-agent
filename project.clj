@@ -9,7 +9,7 @@
                  [com.stuartsierra/component "0.3.2"]
                  [slack-rtm "0.1.7-SNAPSHOT"]
                  [ring "1.6.1"]
-                 [ring/ring-json "0.4.0"]
+                 [ring/ring-json "0.5.1"]
                  [ring/ring-codec "1.1.0"]
                  [compojure "1.6.0"]
                  [cheshire "5.7.1"]
