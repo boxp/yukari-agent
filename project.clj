@@ -10,7 +10,7 @@
                  [slack-rtm "0.1.7-SNAPSHOT"]
                  [ring "1.6.1"]
                  [ring/ring-json "0.4.0"]
-                 [ring/ring-codec "1.1.0"]
+                 [ring/ring-codec "1.2.0"]
                  [compojure "1.6.0"]
                  [cheshire "5.7.1"]
                  [clj-http "3.7.0"]
