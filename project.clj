@@ -12,7 +12,7 @@
                  [ring/ring-json "0.4.0"]
                  [ring/ring-codec "1.1.0"]
                  [compojure "1.6.0"]
-                 [cheshire "5.7.1"]
+                 [cheshire "5.12.0"]
                  [clj-http "3.7.0"]
                  [org.clojure/data.xml "0.0.8"]
                  [org.clojure/tools.namespace "0.2.10"]]
