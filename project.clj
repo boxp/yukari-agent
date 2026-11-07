@@ -15,7 +15,7 @@
                  [cheshire "5.12.0"]
                  [clj-http "3.12.3"]
                  [org.clojure/data.xml "0.0.8"]
-                 [org.clojure/tools.namespace "0.2.10"]]
+                 [org.clojure/tools.namespace "0.3.1"]]
   :profiles
   {:dev {:source-paths ["src" "dev"]}
    :uberjar {:main yukari-agent.system}})
