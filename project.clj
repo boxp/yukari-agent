@@ -11,7 +11,7 @@
                  [ring "1.6.1"]
                  [ring/ring-json "0.4.0"]
                  [ring/ring-codec "1.1.0"]
-                 [compojure "1.6.0"]
+                 [compojure "1.7.0"]
                  [cheshire "5.12.0"]
                  [clj-http "3.12.3"]
                  [org.clojure/data.xml "0.0.8"]
